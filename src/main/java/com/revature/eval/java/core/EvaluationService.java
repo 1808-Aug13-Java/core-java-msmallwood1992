@@ -3,6 +3,7 @@ package com.revature.eval.java.core;
 import java.time.temporal.Temporal;
 import java.util.List;
 import java.util.Map;
+import java.lang.IllegalArgumentException;
 
 public class EvaluationService {
 
@@ -13,6 +14,7 @@ public class EvaluationService {
 	 * @param string
 	 * @return
 	 */
+	
 	public String reverse(String string) {
 		char[] stringArray = string.toCharArray();
 		int arrLength = stringArray.length;
@@ -131,8 +133,20 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getScrabbleScore(String string) {
-		// TODO Write an implementation for this method declaration
-		return 0;
+		char[] letters = {'A','E','I','O','U','L','N','R','S','T','D','G','B','C','M','P','F','H','V','W','Y','K','J','X','Q','Z'};
+		int[]  scores  = {1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 2, 2, 3, 3, 3, 3, 4, 4, 4, 4, 4, 5, 8, 8, 10,10};
+		int total = 0;
+		string = string.toUpperCase();
+		char[] charArr = string.toCharArray();
+		for(char letter: charArr) {
+			for(int i =0; i<26; i++) {
+				if(letter==letters[i]) {
+					total+=scores[i];
+					continue;
+				}
+			}
+		}
+		return total;
 	}
 
 	/**
@@ -166,9 +180,29 @@ public class EvaluationService {
 	 * Note: As this exercise only deals with telephone numbers used in
 	 * NANP-countries, only 1 is considered a valid country code.
 	 */
-	public String cleanPhoneNumber(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+	public String cleanPhoneNumber(String string) throws IllegalArgumentException{
+		String number = "";
+		String delims = "[- ().]+";
+//		char[] illegal = {'a','b','c','@','!',':'};
+		String[] splits = string.split(delims);
+		number = String.join("", splits);
+		if(number.length()>11) {
+			try {
+				throw new IllegalArgumentException();
+			}catch(IllegalArgumentException e) {
+				e.printStackTrace();
+			}
+		}
+		for(char a: number.toCharArray()) {
+			if(a=='a'||a=='b'||a=='c'||a=='@'||a=='!'||a==':') {
+				try {
+					throw new IllegalArgumentException();
+				}catch(IllegalArgumentException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return number;
 	}
 
 	/**
