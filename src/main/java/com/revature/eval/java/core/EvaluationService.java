@@ -14,8 +14,20 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String reverse(String string) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		char[] stringArray = string.toCharArray();
+		int arrLength = stringArray.length;
+		int arrMiddle = arrLength/2;
+		char first;
+		char last;
+		String reversed;
+		for(int a=0; a<arrMiddle; a++) {
+			first = stringArray[a];
+			last = stringArray[arrLength-(a+1)];
+			stringArray[a]=last;
+			stringArray[arrLength-(a+1)] = first;
+		}
+		reversed = new String(stringArray);
+		return reversed;
 	}
 
 	/**
@@ -27,8 +39,14 @@ public class EvaluationService {
 	 * @return
 	 */
 	public String acronym(String phrase) {
-		// TODO Write an implementation for this method declaration
-		return null;
+		String acronym = "";
+		String delims = "[ ,-]+";
+		phrase = phrase.toUpperCase();
+		String[] splits = phrase.split(delims);
+		for(String part: splits) {
+			acronym+= part.charAt(0);
+		}
+		return acronym;
 	}
 
 	/**
@@ -81,18 +99,18 @@ public class EvaluationService {
 		}
 
 		public boolean isEquilateral() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			boolean equal = sideOne==sideTwo&&sideOne==sideThree?true:false;
+			return equal;
 		}
 
 		public boolean isIsosceles() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			boolean isosceles = sideOne==sideTwo||sideOne==sideThree||sideTwo==sideThree?true:false;
+			return isosceles;
 		}
 
 		public boolean isScalene() {
-			// TODO Write an implementation for this method declaration
-			return false;
+			boolean scalene = sideOne!=sideTwo&&sideOne!=sideThree&&sideTwo!=sideThree?true:false;
+			return scalene;
 		}
 
 	}
@@ -417,8 +435,7 @@ public class EvaluationService {
 	}
 
 	/**
-	 * 16. Determine if a sentence is a pangram. A pangram (Greek: παν γράμμα, pan
-	 * gramma, "every letter") is a sentence using every letter of the alphabet at
+	 * 16. Determine if a sentence is a pangram. A pangram is a sentence using every letter of the alphabet at
 	 * least once. The best known English pangram is:
 	 * 
 	 * The quick brown fox jumps over the lazy dog.
