@@ -1,8 +1,14 @@
 package com.revature.eval.java.core;
 
 import java.time.Duration;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.Temporal;
+import java.time.temporal.TemporalAccessor;
+import java.time.temporal.TemporalAmount;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -756,11 +762,15 @@ public class EvaluationService {
 	 * @return
 	 */
 	public Temporal getGigasecondDate(Temporal given) {
-		Temporal giga;
-//		Duration time = Duration.
-//		giga = given.plus(time);
-		//just add 1,000,000,000 seconds to a date given.
-		return null;
+		System.out.println(given);
+		LocalDateTime time;
+		try {
+		time = LocalDateTime.parse(given.toString());
+		}catch (Exception e) {
+		time = LocalDateTime.parse(given.toString()+"T00:00:00");
+		}
+		time = time.plusSeconds(1000000000L);
+		return time;
 	}
 
 	/**
