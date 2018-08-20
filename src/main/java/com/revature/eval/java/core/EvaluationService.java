@@ -7,6 +7,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -521,8 +522,24 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int calculateNthPrime(int i) {
-		
-		return 0;
+		if(i==0)
+			throw new IllegalArgumentException();
+		int cPrime=2;
+		int nTh=0;
+		do {
+			if(isPrime(cPrime))
+				nTh++;
+			cPrime++;
+		}while(nTh<i);
+		return cPrime-1;
+	}
+	public boolean isPrime(int n) {
+		for(int i = 2; i <= Math.sqrt(n); ++i) {
+	        if (n%i == 0) {
+	            return false;
+	        }
+	    }
+	    return true;
 	}
 
 	/**
@@ -733,7 +750,7 @@ public class EvaluationService {
 	/**
 	 * 17. Calculate the moment when someone has lived for 10^9 seconds.
 	 * 
-	 * A gigasecond is 109 (1,000,000,000) seconds.
+	 * A gigasecond is 10^9 (1,000,000,000) seconds.
 	 * 
 	 * @param given
 	 * @return
@@ -760,13 +777,24 @@ public class EvaluationService {
 	 * @return
 	 */
 	public int getSumOfMultiples(int i, int[] set) {
-		Set numbers;
+		Set<Integer> numbers = new HashSet<Integer>();
+		for(int c = 0;c<i;c++)
+		{
+			for(int a:set)
+			{
+				if(c%a==0)
+					numbers.add(c);
+			}
+		}
+		int sum =0;
+		for(int s:numbers)
+			sum+=s;
 		//make a list of unique numbers
 		//construct a for loop that checks each number to see if it is a multiple
 		//of any of the numbers in the set.
 		//on a new/unique number, add it to the list. on a non-unique number, ignore.
 		//get the sum of the numbers in the set.
-		return 0;
+		return sum;
 	}
 
 	/**
